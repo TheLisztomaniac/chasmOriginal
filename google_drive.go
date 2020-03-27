@@ -43,7 +43,7 @@ func (g *GDriveStore) Setup() bool {
 	g.OAuthToken = *tok
 
 	ctx := context.Background()
-	//	client := config.Client(ctx, &g.OAuthToken)
+	//client := config.Client(ctx, &g.OAuthToken)
 
 	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
