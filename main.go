@@ -247,7 +247,7 @@ func main() {
 					Action: addFolder,
 				},
 				{
-					Name:   "drive",
+					Name:   "gdrive",
 					Usage:  "add google drive",
 					Action: addDrive,
 				},

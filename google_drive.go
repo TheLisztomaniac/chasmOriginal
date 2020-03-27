@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"google.golang.org/api/option"
 	"io/ioutil"
 	"log"
 	"path"
@@ -42,9 +43,9 @@ func (g *GDriveStore) Setup() bool {
 	g.OAuthToken = *tok
 
 	ctx := context.Background()
-	client := config.Client(ctx, &g.OAuthToken)
+	//	client := config.Client(ctx, &g.OAuthToken)
 
-	svc, err := drive.New(client)
+	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
 		color.Red("Unable to retrieve drive Client %v", err)
 		return false
@@ -71,9 +72,9 @@ func (g *GDriveStore) Setup() bool {
 func (g GDriveStore) Upload(share Share) {
 	ctx := context.Background()
 	config := &g.Config
-	client := config.Client(ctx, &g.OAuthToken)
+	//client := config.Client(ctx, &g.OAuthToken)
 
-	svc, err := drive.New(client)
+	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
 		color.Red("Unable to retrieve drive Client %v", err)
 		return
@@ -103,9 +104,9 @@ func (g GDriveStore) Upload(share Share) {
 func (g GDriveStore) Delete(sid ShareID) {
 	ctx := context.Background()
 	config := &g.Config
-	client := config.Client(ctx, &g.OAuthToken)
+	//client := config.Client(ctx, &g.OAuthToken)
 
-	svc, err := drive.New(client)
+	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
 		color.Red("Unable to retrieve drive Client %v", err)
 		return
@@ -123,9 +124,9 @@ func (g GDriveStore) Delete(sid ShareID) {
 func (g GDriveStore) Restore() string {
 	ctx := context.Background()
 	config := &g.Config
-	client := config.Client(ctx, &g.OAuthToken)
+	//client := config.Client(ctx, &g.OAuthToken)
 
-	svc, err := drive.New(client)
+	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
 		color.Red("Unable to retrieve drive Client %v", err)
 		return ""
@@ -175,9 +176,9 @@ func (g GDriveStore) Restore() string {
 func (g GDriveStore) Description() string {
 	ctx := context.Background()
 	config := &g.Config
-	client := config.Client(ctx, &g.OAuthToken)
+	//client := config.Client(ctx, &g.OAuthToken)
 	label := "Google Drive Store"
-	svc, err := drive.New(client)
+	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
 		color.Red("Unable to retrieve drive Client %v", err)
 		return label
@@ -208,9 +209,9 @@ func (g GDriveStore) Description() string {
 func (g GDriveStore) ShortDescription() string {
 	ctx := context.Background()
 	config := &g.Config
-	client := config.Client(ctx, &g.OAuthToken)
+	//client := config.Client(ctx, &g.OAuthToken)
 	label := "Google Drive Store"
-	svc, err := drive.New(client)
+	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
 		color.Red("Unable to retrieve drive Client %v", err)
 		return label
@@ -230,9 +231,9 @@ func (g GDriveStore) Clean() {
 
 	ctx := context.Background()
 	config := &g.Config
-	client := config.Client(ctx, &g.OAuthToken)
+	//client := config.Client(ctx, &g.OAuthToken)
 
-	svc, err := drive.New(client)
+	svc, err := drive.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, &g.OAuthToken)))
 	if err != nil {
 		color.Red("Unable to retrieve drive Client %v", err)
 		return
